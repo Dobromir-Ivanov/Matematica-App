@@ -1,0 +1,86 @@
+<div ng-controller="OptionsCtrl" class="show-options clearfix">
+    <div class="btn-group-xs pull-right"><!-- Button trigger modal-->
+        <button type="button" data-toggle="modal" data-target="#showOptionsPanel" class="btn btn-default">Options
+        </button>
+    </div>
+    <!-- Modal-->
+    <div id="showOptionsPanel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+        <div role="document" class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                            aria-hidden="true">×</span></button>
+                    <h3 class="modal-title">Options box!</h3></div>
+                <div class="modal-body">
+                    <div class="top-panels-options">
+                        <div class="col-lg-4 top-panels">
+                            <div class="input-group"><span id="basic-addon1"
+                                                           class="input-group-addon">Obiettivo punti:</span><input
+                                    type="number" aria-describedby="basic-addon1" ng-model="options.objectivePoints"
+                                    class="form-control objective-points"/></div>
+                        </div>
+                        <div class="col-lg-4 top-panels">
+                            <div class="input-group"><span id="basic-addon2"
+                                                           class="input-group-addon">Dificolta</span><select
+                                    aria-describedby="basic-addon2" ng-model="options.difficulty.selectedMode"
+                                    ng-options="difficulty.name for difficulty in difficulties"
+                                    class="form-control objective-points"></select></div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Operazioni</th>
+                                <th>Valore di primo numero</th>
+                                <th>Valore di secondo numero</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="option in options.setingValueForTask track by $index">
+                                <td><input type="checkbox" ng-name="option.operator.operation"
+                                           ng-model="option.operator.check"/></td>
+                                <td>{{ option.operator.name }}</td>
+                                <td class="opzioni-number-box">
+                                    <table>
+                                        <tr>
+                                            <td><label>da:</label></td>
+                                            <td><input type="number" ng-model="option.firstValue.da"
+                                                       class="input-opzioni"/></td>
+                                            <td><label>all:</label></td>
+                                            <td><input type="number" ng-model="option.firstValue.all"
+                                                       class="input-opzioni"/></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td class="opzioni-number-box">
+                                    <table>
+                                        <tr>
+                                            <td><label>da:</label></td>
+                                            <td><input type="number" ng-model="option.secondValue.da"
+                                                       class="input-opzioni"/></td>
+                                            <td><label>all:</label></td>
+                                            <td><input type="number" ng-model="option.secondValue.all"
+                                                       class="input-opzioni"/></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>({{ option.firstValue.da }}-{{ option.firstValue.all }})
+                                    {{option.operator.operation}} ({{ option.secondValue.da }}-{{ option.secondValue.all
+                                    }}) = ?
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="ok()" class="btn btn-primary">OK</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-warning">Cancel</button>
+                    <button type="button" ng-click="reset()" class="btn btn-success">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

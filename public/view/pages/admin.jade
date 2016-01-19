@@ -1,0 +1,9 @@
+div.container(ng-controller='ProfileCtrl')
+    .row
+        h1 Ciao {{identity.currentUser.username}}!
+        div
+            a(href="/pratica") Vai practicare
+        div
+            a.btn.btn-warning.btn-sm(href="#" ng-click="logout()") Sign Out
+                span.campo-obligatorio
+                    i.fa.fa-power-off

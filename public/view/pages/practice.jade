@@ -1,0 +1,49 @@
+div.modal-content
+    .container
+        //Options content
+        include ../partials/panel-options
+
+        //Point content
+        .points.alert
+            .pull-left
+                label Punti: {{ user.points }}
+            .pull-right
+                label Obiettivo: {{ user.target }}
+            .clearfix
+            div
+                progressbar(max="max", value="user.points", type="{{type}}")
+                    span.text-center(style='color:white; white-space:nowrap; margin-left: 50%;') {{user.points}} / {{max}}
+
+
+        //Errors content
+        include ../partials/panel-errors
+
+        //Timer content
+        .time-difficulty.text-center(timer="myScope", user-answer="{{ user.answer }}")
+
+        //Task content
+        #task-box.text-center.jumbotron(ng-cloak='')
+            p
+                label.task-elements {{ task.firstNum }}
+                label.task-elements {{ task.operator }}
+                label.task-elements {{ task.secondNum }}
+                | =
+                input.task-elements.inp-user-resalt(type='number', ng-model='user.resaltOfTask')
+                button#resultBtn.task-elements.btn.btn-primary(ng-click='resultBtn()', ng-disabled="user.resaltOfTask === ('' || isNaN(user.resaltOfTask)) || hideBtnHelp") {{ button }}
+
+            p
+                img#profesorBody(src='img/profesore.png', width='170')
+
+            .text-center(ng-show='showHelpBox')
+                ul
+                    li.btn.btn-lg.btn-default(ng-repeat='answer in arrAnswers track by $index', ng-click='resultOfHelpBtn(answer)') {{ answer }}
+
+
+        //Help content
+        .row
+            .pull-left
+                button.btn.btn-default.right.btn-practice-page(type='button', ng-disabled="user.resaltOfTask !== '' || hideBtnHelp", ng-click='helpBtn()') Help
+                    span.campo-obligatorio
+                        i.fa.fa-question
+            .pull-right
+                label Esercizi risolti: {{ user.tasksRisolved}}

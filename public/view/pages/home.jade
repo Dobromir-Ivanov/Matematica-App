@@ -1,0 +1,71 @@
+div.container
+    .row
+        .col-md-4.col-md-offset-4.text-center
+            a.btn.btn-success.btn-block.btn-lg.btn-block.upper(href='/pratica') Pratica
+                span.icon-btn
+                    i.fa.fa-bars
+    #login-form
+        input#login.hide(type='radio', checked='', name='switch')
+        input#signup.hide(type='radio', name='switch')
+        div
+            ul.form-header
+                li
+                    label(for='login')
+                        i.fa.fa-lock
+                        |  LOGIN
+                        label(for='login')
+                li
+                    label(for='signup')
+                        i.fa.fa-credit-card
+                        |  REGISTER
+        .section-out
+            section.login-section(ng-controller='LoginCtrl')
+                .login
+                    form(name='loginForm')
+                        ul.ul-list
+                            li
+                                input.input(type="text", placeholder="Username", ng-model="user.username")
+                                span.icon
+                                    i.fa.fa-user
+                            li
+                                input.input(type="password", placeholder="Password", ng-model="user.password")
+                                span.icon
+                                    i.fa.fa-lock
+                            li
+                                button.btn.btn-primary.btn-lg.btn-block(ng-click="login(user)") Login
+                                    span.icon-btn
+                                        i.fa.fa-sign-in
+            section.signup-section(ng-controller='RegisterCtrl')
+                .login
+                    form(name='signUpForm')
+                        ul.ul-list
+                            li
+                                p Campi obligatorii ( * )
+                            li
+                                input.input(type='name', required='', ng-model="user.username", placeholder='Username')
+                                span.icon
+                                    i.fa.fa-user
+                                span.campo-obligatorio *
+                            li
+                                input.input(type='email', ng-model="user.email", placeholder='La tua email')
+                                span.icon
+                                    i.fa.fa-envelope
+                            li
+                                input.input(type='number', ng-model="user.age", required='', placeholder='Quanti anni hai')
+                                span.icon
+                                    i.fa.fa-info
+                                span.campo-obligatorio *
+                            li
+                                input#userPassword.input(type='password', ng-model="user.password", required='', placeholder='Password')
+                                span.icon
+                                    i.fa.fa-key
+                                span.campo-obligatorio *
+                            li
+                                input.input(type="password", ng-model="user.confirmPassword", required='', placeholder="Conferma la password")
+                                span.icon
+                                    i.fa.fa-key
+                                span.campo-obligatorio *
+                            li
+                                | {{mesge}}
+                            li
+                                input.btn.btn-primary.btn-lg.btn-block(ng-click="signup(user)", ng-disabled="signUpForm.$invalid", required='', value='SIGN UP')

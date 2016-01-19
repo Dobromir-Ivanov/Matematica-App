@@ -1,0 +1,108 @@
+div.container
+    .row
+        .col-md-6
+            .row
+                .col-md-6.panel-default
+                    .panel.panel-body
+                        span.icon-btn
+                        i.fa.fa-comment-o
+                        bs-component
+                            blockquote
+                                p {{user.message}}
+                .col-md-6(ng-show="identity.isAuthorizedForRole('user')")
+                    a.btn.btn-success.btn-lg.btn-block(href="/pratica") PRACTICARE
+                        span.icon-btn
+                            i.fa.fa-bars
+            .row(ng-show="identity.isAuthorizedForRole('user')")
+                .col-xs-6.panel.panel-default
+                    .panel-heading.text-center
+                        p
+                        span.icon-btn
+                            i.fa.fa-graduation-cap
+                        | MIO PROFILO
+                    .panel-body.table-responsive
+                        table.table
+                            thead
+                                tr
+                                    th User nome |
+                                    th {{user.username}}
+                            tbody
+                                tr
+                                    td Email
+                                    td {{user.email}}
+                                tr
+                                    td Anni
+                                    td {{user.age}}
+                                tr
+                                    td Punti
+                                    td {{user.points}}
+                                tr
+                                    td Bonus punti
+                                    td {{user.bonusPoints}}
+                                tr
+                                    td Esercizi risolti
+                                    td {{user.tasksResolved}}
+                .col-xs-6(ng-show="identity.isAuthorizedForRole('user')")
+                    .alert.alert-info.text-center(role="alert")
+                            p
+                                span.icon-btn
+                                    i.fa.fa-line-chart
+                                | SEI IN POSIZIONE:
+                                span.icon-btn
+                                    b {{qualificPosition}}
+            .row(ng-show="identity.isAuthorizedForRole('user')")
+                .col-md-12.block-info
+                    .panel.panel-default
+                        .panel-heading
+                            a(href='#', ng-click='showInfo()')
+                                span.icon-btn
+                                    i.fa.fa-info-circle
+                                | Informazioni
+                                span.icon-btn
+                                    i(ng-class='arrow')
+                        .panel-body(ng-show='infoBlock')
+                            h5
+                                b Lista con bonus punti
+                            p Puoi guadagnare bonus punti dopo aver fatto minimum 50 esercizi o 500 punti.
+                            ol
+                                li Ogni 50 esercizi o 500 punti - 50p.
+                                li Bonus punti per la difficoltà, usando tempo per la risposta - da 0 - 50p.
+                                li Bonus punti per la difficoltà, usando più variabili ( +, -, *, /) da 25 - 225p.
+                            hr
+                            .alert.alert-danger(role="alert")
+                                p
+                                    b Attenzione:
+                                ol
+                                    li 1: Gli bonus punti, saranno salvati solo quando raggiungi il tuo obiettivo!
+                                    li 2: Il punteggio che supera il tuo obiettivo non sara salvato.
+                                    li 3: Usa le opzioni per configurare il tuoi esercizi.
+        .col-md-6.panel.panel-primary
+            .panel-heading.text-center
+                p MIGLIOR RESULTATI
+                    span.icon-btn
+                        i.fa.fa-trophy
+                    | TOP 10
+            .panel-body
+                label(for="sel1") Selezionare gli utenti per ;
+                select#sel1.form-control.list-group(ng-model="model")
+                    option.list-group-item(value="-points") Punti
+                    option.list-group-item(value="-bonusPoints") Bonus punti
+                    option.list-group-item(value="-tasksResolved") Esercizi risolti
+                table.table.table-bordered.table-responsive
+                    thead
+                        th #
+                        th Nome
+                        th Punti
+                        th Bonus punti
+                        th Esercizi risolti
+                    tbody
+                        tr(ng-repeat="user in users | filter:{ points: ''} | orderBy: [model] | limitTo : 10")
+                            td {{$index + 1 }}
+                            td {{user.username}}
+                            td {{user.points}}
+                            td {{user.bonusPoints}}
+                            td {{user.tasksResolved}}
+    div
+        a.btn.btn-warning.btn-sm(href="#" ng-click="logout()") EXIT
+            span.campo-obligatorio
+                i.fa.fa-power-off

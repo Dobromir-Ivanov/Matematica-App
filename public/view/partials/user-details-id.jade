@@ -1,0 +1,34 @@
+.container
+    .panel.panel-warning
+        .panel-heading
+            h3.text-center Edit  User!
+        .panel-body
+            form.form-horizontal(name="profileForm")
+                fieldset
+                    .form-group
+                        label.col-md-2.control-label(for="user-name") User Name
+                        .col-md-10
+                            input#user-name.form-control(type="text", name="username", ng-model="user.username")
+                    .form-group
+                        label.col-md-2.control-label(for="user-points") User Points
+                        .col-md-10
+                            p#user-points.form-control {{user.points}}
+                    .form-group
+                        label.col-md-2.control-label(for="email") Email
+                        .col-md-10
+                            input.form-control(type="mail", placeholder="Email", ng-model="user.email")
+                    .form-group
+                        label.col-md-2.control-label(for="age") Age
+                        .col-md-10
+                            input.form-control(type="number", placeholder="Age", ng-model="user.age")
+                    .form-group
+                        label.col-md-2.control-label(for="roles") Roles
+                        .col-md-10
+                            input.form-control(type="text", placeholder="Roles", ng-model="user.roles")
+                    .form-group
+                        label.col-md-2.control-label(for="message") Message
+                        .col-md-10
+                            textarea.form-control(rows="4", cols="50", placeholder="Message", ng-model="user.message") {{user.message}}
+                .pull-right
+                    button.btn.btn-warning(ng-click="update(user)", ng-disabled="profileForm.$invalid") Update
+                    a.btn.btn-primary(href="/users/details") Cancel

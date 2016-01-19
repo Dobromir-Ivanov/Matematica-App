@@ -1,0 +1,50 @@
+extends includes/layout
+
+block main-content
+    header
+        nav.navbar.navbar-default
+            .container-fluid
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    h1.navbar-brand Matematica
+                    h1.navbar-brand
+                        a(href='/')
+                            span(class='glyphicon glyphicon-home')
+                div(ng-show="identity.isAuthorizedForRole('user')")
+                    ul.nav.navbar-nav
+                       li.active
+                            a(href="/profile") Mio profilo
+                    .container.col-md-5.col-md-offset-2.text-center
+                        p.user-info-block
+                            span.pull-left
+                                i.fa.fa-user.info-icons
+                                | User nome: {{identity.currentUser.username}}
+                            span.pull-right
+                                i.fa.fa-trophy.info-icons
+                                | Punti: {{identity.currentUser.points}}
+                div(ng-show="identity.isAuthorizedForRole('admin')")
+                    ul.nav.navbar-nav
+                        li.active
+                            a(href="/profile") Mio profilo
+                        li
+                            a(href='/users/details') Edit Users
+                div.pull-right(ng-hide="identity.isAuthenticated()")
+                    ul.nav.navbar-nav
+                        li.active
+                            a(href="/contatti")
+                                span.icon-btn(class='glyphicon glyphicon-envelope')
+                                | contatti
+
+    section
+        div(ng-view='')
+
+    footer.footer.text-center
+        .container
+            p
+                span.icon-btn &copy
+                a(href='http://di-it.com', target="_blank") DI-IT
+                span.campo-obligatorio -  2016

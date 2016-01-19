@@ -1,0 +1,27 @@
+.container.panel.panel-default
+    .panel-body.table-responsive
+        table.table.table-bordered.table-admin
+            thead
+                th #
+                th Name
+                th Points
+                th Email
+                th Roles
+                th Anni
+                th Messages
+            tr(ng-repeat="user in users")
+                td {{$index + 1 }}
+                td {{user.username}}
+                td {{user.points}}
+                td {{user.email}}
+                td {{user.roles[0]}}
+                td {{user.age}}
+                td {{user.message}}
+                td
+                    a(href="/user/edit/{{user._id}}")
+                        span.icon-table-edit
+                            i.fa.fa-pencil
+                td
+                    a(href="/user/delete/{{user._id}}")
+                        span.icon-table-edit
+                            i.fa.fa-trash

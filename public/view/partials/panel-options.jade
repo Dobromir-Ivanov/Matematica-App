@@ -1,0 +1,66 @@
+.show-options.clearfix(ng-controller='OptionsCtrl')
+    .btn-group-xs.pull-right
+        // Button trigger modal
+        button.btn.btn-default.btn-practice-page(type='button', data-toggle='modal', data-target='#showOptionsPanel')
+            | Opzioni
+            span.campo-obligatorio
+                i.fa.fa-cog
+    // Modal
+    #showOptionsPanel.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h3.modal-title Pannello di opzioni!
+                .modal-body
+                    .top-panels-options
+                        .col-lg-4.top-panels
+                            .input-group
+                                span#basic-addon1.input-group-addon Obiettivo punti:
+                                input.form-control.objective-points(type='number', aria-describedby='basic-addon1', ng-model='options.objectivePoints')
+                        .col-lg-4.top-panels
+                            .input-group
+                                span#basic-addon2.input-group-addon Dificolta
+                                select.form-control.objective-points(aria-describedby='basic-addon2', ng-model='options.difficulty.selectedMode', ng-options='difficulty.name for difficulty in difficulties')
+                    .table
+                        table.table.table-bordered.table-hover
+                            thead
+                                tr
+                                    th
+                                    th Operazioni
+                                    th Valore di primo numero
+                                    th Valore di secondo numero
+                            tbody
+                                tr(ng-repeat='option in options.setingValueForTask track by $index')
+                                    td
+                                        input(type='checkbox', ng-name='option.operator.operation', ng-model='option.operator.check')
+                                    td {{ option.operator.name }}
+                                    td.opzioni-number-box
+                                        table
+                                            tr
+                                                td
+                                                    label da:
+                                                td
+                                                    input.input-opzioni(type='number', ng-model='option.firstValue.da')
+                                                td
+                                                    label all:
+                                                td
+                                                    input.input-opzioni(type='number', ng-model='option.firstValue.all')
+                                    td.opzioni-number-box
+                                        table
+                                            tr
+                                                td
+                                                    label da:
+                                                td
+                                                    input.input-opzioni(type='number', ng-model='option.secondValue.da')
+                                                td
+                                                    label all:
+                                                td
+                                                    input.input-opzioni(type='number', ng-model='option.secondValue.all')
+                                    td
+                                        | ({{ option.firstValue.da }}-{{ option.firstValue.all }}) {{option.operator.operation}} ({{ option.secondValue.da }}-{{ option.secondValue.all }}) = ?
+                .modal-footer
+                    button.btn.btn-primary(type='button', ng-click='ok()') OK
+                    button.btn.btn-warning(type='button', data-dismiss='modal') Cancel
+                    button.btn.btn-success(type='button', ng-click='reset()') Reset
