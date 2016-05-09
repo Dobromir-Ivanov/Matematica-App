@@ -10,7 +10,7 @@ module.exports = {
     },
     production: {
         rootPath: rootPath,
-        db: 'mongodb://admine:130784@ds055732.mongolab.com:55732/first-progect-db',
+        db: 'mongodb://admine:..............................', //hidden code
         port: process.env.PORT || PORT
     }
 
